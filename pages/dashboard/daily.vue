@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import moment from 'moment'
-import DailyDashboard from '../components/DailyDashboard.vue'
+import DailyDashboard from '../../components/DailyDashboard.vue'
 definePageMeta({
   middleware: "auth",
 })

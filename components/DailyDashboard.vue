@@ -26,47 +26,22 @@
       v-if="trackerList.value && trackerList.value.length > 0"
       class="space-y-4"
     >
-      <TrackerItem
+      <ViewTrackerItem
         v-for="item in trackerList.value"
         :key="item.id"
         :item="item"
-        @refresh="handleRefresh"
       />
-      <div class="flex justify-end">
-        <UButton
-          v-if="!showCreateForm"
-          icon="mdi-plus"
-          size="lg"
-          variant="outline"
-          @click="handleCreate"
-          >เพิ่มข้อมูล</UButton
-        >
-      </div>
     </div>
-    <div
-      v-else-if="!showCreateForm"
-      class="min-h-[300px] flex flex-col items-center justify-center gap-6"
-    >
+    <div v-else class="min-h-[300px] flex flex-col items-center justify-center gap-6">
       <p class="text-gray italic">ยังไม่มีข้อมูลของวันนี้</p>
-      <UButton icon="mdi-plus" size="lg" variant="outline" @click="handleCreate"
-        >เพิ่มข้อมูล</UButton
-      >
     </div>
-    <TrackerCreateForm
-      v-if="showCreateForm"
-      :date="props.date"
-      :user-id="user.id"
-      @cancel="handleCancelCreate"
-      @success-create="handleSuccessCreate"
-    />
   </div>
 </template>
 
 <script lang="ts" setup>
 import moment from "moment";
 import { type ITracker } from "./types";
-import TrackerItem from "./TrackerItem.vue";
-import TrackerCreateForm from "./TrackerCreateForm.vue";
+import ViewTrackerItem from "./ViewTrackerItem.vue";
 const props = defineProps<{
   date: string;
 }>();
@@ -86,24 +61,6 @@ const nextDate = computed(() =>
 );
 const displayDay = computed(() => moment(props.date).format("ddd"));
 const displayDate = computed(() => moment(props.date).format("D MMMM YYYY"));
-const showCreateForm = ref(false);
-
-const handleCreate = () => {
-  showCreateForm.value = true;
-};
-
-const handleCancelCreate = () => {
-  showCreateForm.value = false;
-};
-
-const handleSuccessCreate = () => {
-  showCreateForm.value = false;
-  fetchTrackers(props.date);
-};
-
-const handleRefresh = () => {
-  fetchTrackers(props.date);
-};
 
 const fetchTrackers = async (date: string) => {
   const { data: trackers } = await useAsyncData("trackers", async () => {
@@ -119,7 +76,6 @@ const fetchTrackers = async (date: string) => {
   });
 
   trackerList.value = trackers;
-  showCreateForm.value = false;
 };
 
 fetchTrackers(props.date);
