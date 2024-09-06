@@ -6,14 +6,14 @@
           <img :src="avatar" :alt="group.profiles.display_name" class="rounded w-10"/>
           <div>
             <h4>{{ group.profiles.display_name.replace('@finema.co', '').toUpperCase() }}</h4>
-            <h6 class="font-light text-gray-400">{{ group.profiles.display_name }}</h6>
+            <h6 class="text-xs font-light text-gray-400">{{ group.profiles.display_name }}</h6>
           </div>
         </div>
-        <h6 class="font-bold text-gray-400">{{ moment(group.tracker_date).format('DD/MM/YYYY') }}</h6>
+        <h6 class="text-xs font-bold text-gray-400">{{ moment(group.tracker_date).format('DD/MM/YYYY') }}</h6>
       </div>
       <h5 class="bg-primary text-white my-2 rounded-lg flex justify-between items-center px-2">
         <span class="text-xs">Total time tracked</span> 
-        <span class="font-semibold">{{ totalTime }} hr.</span>
+        <span class="text-sm font-semibold">{{ totalTime }} hr.</span>
       </h5>
     </div>
     <div
