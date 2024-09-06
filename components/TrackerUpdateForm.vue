@@ -15,6 +15,8 @@
           v-model="selectedType"
           :options="typeOptions"
           placeholder="เลือกประเภทงาน"
+          value-attribute="value"
+          option-attribute="label"
           searchable
         />
         <USelectMenu

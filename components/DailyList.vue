@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="flex justify-between">
+    <div class="my-4 flex items-center justify-center">
+      <span class="text-base md:text-2xl text-gray mr-2">{{ displayDay }}:</span>
+      <span class="text-xl md:text-3xl font-bold">{{ displayDate }}</span>
+    </div>
+    <div class="flex justify-between my-4">
       <div>
         <UButton
           icon="mdi-arrow-left-thick"
@@ -15,10 +19,6 @@
           :to="`?date=${nextDate}`"
         />
       </div>
-    </div>
-    <div class="my-4 flex items-center justify-center">
-      <span class="text-base md:text-2xl text-gray mr-2">{{ displayDay }}:</span>
-      <span class="text-xl md:text-3xl font-bold">{{ displayDate }}</span>
     </div>
     <div
       v-if="trackerList.value && trackerList.value.length > 0"

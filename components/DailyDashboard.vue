@@ -89,6 +89,7 @@ const groupByUserTrackers = computed(() => {
       groupedMap.set(item.created_by, {
         created_by: item.created_by,
         profiles: item.profiles,
+        tracker_date: item.tracker_date,
         items: [],
       });
     }

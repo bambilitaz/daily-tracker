@@ -27,8 +27,6 @@
 <script lang="ts" setup>
 import { type ITracker } from "./types";
 import { TRACKER_TYPE_LABEL } from "../constants/tracker_types";
-import TrackerUpdateForm from "./TrackerUpdateForm.vue";
-
 const props = defineProps<{
   item: ITracker;
 }>();
