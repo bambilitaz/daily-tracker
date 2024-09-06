@@ -1,5 +1,10 @@
 <template>
   <div>
+    <h1 class="text-center text-3xl font-bold">Team Daily Summary</h1>
+    <div class="flex items-center justify-center">
+      <span class="text-base text-gray mr-2">{{ displayDay }}:</span>
+      <span class="text-xl font-semibold">{{ displayDate }}</span>
+    </div>
     <div class="flex justify-between">
       <div>
         <UButton
@@ -16,23 +21,28 @@
         />
       </div>
     </div>
-    <div class="my-4 flex items-center justify-center">
-      <span class="text-base md:text-2xl text-gray mr-2"
-        >{{ displayDay }}:</span
-      >
-      <span class="text-xl md:text-3xl font-bold">{{ displayDate }}</span>
-    </div>
+    <UFormGroup label="ตัวกรองทีม" class="my-4">
+      <USelectMenu
+        v-model="filterTeam"
+        :options="teamOptions"
+        placeholder="ตัวกรองทีม"
+        searchable
+      />
+    </UFormGroup>
     <div
       v-if="trackerList.value && trackerList.value.length > 0"
-      class="space-y-4"
+      class="grid grid-cols-1 lg:grid-cols-3 gap-4"
     >
-      <ViewTrackerItem
-        v-for="item in trackerList.value"
-        :key="item.id"
-        :item="item"
+      <DashboardUserTrackers
+        v-for="group in groupFilterTeam"
+        :key="group.user_id"
+        :group="group"
       />
     </div>
-    <div v-else class="min-h-[300px] flex flex-col items-center justify-center gap-6">
+    <div
+      v-else
+      class="min-h-[300px] flex flex-col items-center justify-center gap-6"
+    >
       <p class="text-gray italic">ยังไม่มีข้อมูลของวันนี้</p>
     </div>
   </div>
@@ -41,7 +51,8 @@
 <script lang="ts" setup>
 import moment from "moment";
 import { type ITracker } from "./types";
-import ViewTrackerItem from "./ViewTrackerItem.vue";
+import { TEAM_OPTIONS } from "../constants/team"
+import DashboardUserTrackers from "./DashboardUserTrackers.vue";
 const props = defineProps<{
   date: string;
 }>();
@@ -62,12 +73,40 @@ const nextDate = computed(() =>
 const displayDay = computed(() => moment(props.date).format("ddd"));
 const displayDate = computed(() => moment(props.date).format("D MMMM YYYY"));
 
+const teamOptions = [{ label: 'ทั้งหมด', value: '' }, ...TEAM_OPTIONS]
+const filterTeam = ref({ label: 'ทั้งหมด', value: '' })
+
+const groupFilterTeam = computed(() => {
+  if (filterTeam.value.value === '') return groupByUserTrackers.value
+  return groupByUserTrackers.value.filter((group) => group.profiles.team === filterTeam.value.value)
+})
+
+const groupByUserTrackers = computed(() => {
+  const groupedMap = new Map<string, any>();
+
+  for (const item of trackerList.value.value) {
+    if (!groupedMap.has(item.created_by)) {
+      groupedMap.set(item.created_by, {
+        created_by: item.created_by,
+        profiles: item.profiles,
+        items: [],
+      });
+    }
+
+    groupedMap.get(item.created_by)!.items.push(item);
+  }
+
+  return Array.from(groupedMap.values()).sort((a, b) =>
+    a.profiles.display_name < b.profiles.display_name ? -1 : 1
+  );
+});
+
 const fetchTrackers = async (date: string) => {
   const { data: trackers } = await useAsyncData("trackers", async () => {
     const { data } = await client
       .from("trackers")
       .select(
-        "*, projects (id, name, code), profiles:created_by (id, display_name)"
+        "*, projects (id, name, code), profiles:created_by (id, display_name, team)"
       )
       .eq("tracker_date", date)
       .order("id", { ascending: true });
