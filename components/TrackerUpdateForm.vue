@@ -28,7 +28,7 @@
         <USelectMenu
           v-model="selectedTiming"
           :options="timingOptions"
-          placeholder="เวลาที่ใชั (ชั่วโมง)"
+          placeholder="เวลาที่ใช้ (ชั่วโมง)"
         />
       </div>
       <UTextarea
@@ -113,6 +113,11 @@ const onSubmit = async () => {
       color: "red",
     });
   } else {
+    toast.add({
+      icon: "mdi-check-circle",
+      title: "แก้ไขข้อมูลสำเร็จ",
+      color: "green",
+    });
     emit("success-update");
   }
 };

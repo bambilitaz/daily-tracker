@@ -27,6 +27,7 @@
         </UForm>
       </UCard>
     </UContainer>
+    <UNotifications />
   </div>
 </template>
 

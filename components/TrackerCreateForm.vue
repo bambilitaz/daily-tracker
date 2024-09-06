@@ -28,7 +28,7 @@
         <USelectMenu
           v-model="selectedTiming"
           :options="timingOptions"
-          placeholder="เวลาที่ใชั (ชั่วโมง)"
+          placeholder="เวลาที่ใช้ (ชั่วโมง)"
         />
       </div>
       <UTextarea

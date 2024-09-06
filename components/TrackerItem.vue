@@ -11,7 +11,9 @@
       class="border-l-8 border-l-primary rounded-lg ring-1 ring-gray-200 p-2"
     >
       <div class="flex justify-between item-center">
-        <div class="flex flex-col md:flex-row gap-2 text-primary md:items-center items-start">
+        <div
+          class="flex flex-col md:flex-row gap-2 text-primary md:items-center items-start"
+        >
           <div class="flex gap-2">
             <UIcon name="mdi-clock" class="w-5 h-5 mb-1" />
             <p class="font-bold">{{ item.timing }} hr.</p>

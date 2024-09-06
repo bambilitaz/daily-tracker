@@ -10,7 +10,7 @@
           <h2 class="font-bold ml-4">Daily Tracker</h2>
         </div>
 
-        <div v-if="user" class="flex flex-col md:flex-row items-center md:gap-4">
+        <div v-if="user" class="flex flex-col md:flex-row items-center gap-4">
           <p>
             Welcome <span class="font-semibold">{{ user.email }}</span>
           </p>
@@ -20,6 +20,7 @@
       <slot />
     </UContainer>
     <UNotifications />
+    <UModals />
   </div>
 </template>
 

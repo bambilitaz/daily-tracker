@@ -4,6 +4,7 @@ export const enum TRACKER_TYPE {
     LEAVE = 'leave',
     MANAGE = 'management',
     STANDBY = 'standby',
+    OT = 'ot',
   }
   
   export const TRACKER_TYPE_LABEL = {
@@ -12,6 +13,7 @@ export const enum TRACKER_TYPE {
     [TRACKER_TYPE.LEAVE]: 'Leave',
     [TRACKER_TYPE.MANAGE]: 'Team Management',
     [TRACKER_TYPE.STANDBY]: 'Standby',
+    [TRACKER_TYPE.OT]: 'OT',
   }
 
   export const TRACKER_TYPE_OPTIONS = [
@@ -34,5 +36,9 @@ export const enum TRACKER_TYPE {
     {
         label: TRACKER_TYPE_LABEL[TRACKER_TYPE.STANDBY],
         value: TRACKER_TYPE.STANDBY,
+    },
+    {
+        label: TRACKER_TYPE_LABEL[TRACKER_TYPE.OT],
+        value: TRACKER_TYPE.OT,
     },
   ]
