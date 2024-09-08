@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-800 flex min-h-screen items-center justify-center">
+  <div class="bg-primary-700 flex min-h-screen items-center justify-center">
     <UContainer>
       <UCard class="w-[320px]">
         <div class="mb-8 flex justify-center">

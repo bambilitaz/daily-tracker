@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout>
-    <Main />
+    <TeamDaily />
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import Main from '../features/Main/index.vue'
+import TeamDaily from '../features/TeamDaily/index.vue'
 
 definePageMeta({
   layout: 'dashboard',

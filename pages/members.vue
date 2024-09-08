@@ -1,14 +1,10 @@
 <template>
   <NuxtLayout>
-    <UCard class="min-h-[500px]">
-      <Main />
-    </UCard>
+    <h2>Coming Soon...</h2>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import Main from '../features/Main/index.vue'
-
 definePageMeta({
   layout: 'dashboard',
   middleware: 'auth',

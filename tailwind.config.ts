@@ -15,8 +15,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['IBM Plex Sans ThaiPrompt', 'sans-serif'],
-        ibm: ['IBM Plex Sans Thai', 'sans-serif'],
+        display: ['Quicksand', 'IBM Plex Sans ThaiPrompt', 'sans-serif'],
+        ibm: ['Quicksand', 'IBM Plex Sans Thai', 'sans-serif'],
+        plain: ['Sukhumvit Set', 'san-serif'],
       },
       colors: {
         main: {
