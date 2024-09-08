@@ -6,9 +6,9 @@
         <ULink to="/dashboard/daily">
           <UCard class="bg-primary">
             <div class="flex gap-4">
-              <UIcon name="mdi-calendar" class="w-12 h-12 text-white"/>
+              <UIcon name="mdi-calendar" class="size-12 text-white" />
               <div>
-                <h2 class="text-white font-bold">Daily Dashboard</h2>
+                <h2 class="font-bold text-white">Daily Dashboard</h2>
                 <h5 class="text-gray-200">สรุปรายวันของทุกคน</h5>
               </div>
             </div>
@@ -20,8 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import moment from 'moment'
 definePageMeta({
-  middleware: "auth",
+  middleware: 'auth',
 })
 </script>

@@ -7,4 +7,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/supabase', '@nuxt/ui'],
   css: ['@/assets/styles/main.scss'],
+  build: {
+    transpile: ['@vuepic/vue-datepicker'],
+  },
 })

@@ -1,10 +1,10 @@
 export default defineAppConfig({
   ui: {
     strategy: 'override',
-    primary: "main",
-    gray: "cool",
+    primary: 'main',
+    gray: 'cool',
     notifications: {
-      position: 'top-0 right-0'
+      position: 'top-0 right-0',
     },
   },
-});
+})

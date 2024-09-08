@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg ring-1 ring-gray-200 p-2">
+  <div class="rounded-lg p-2 ring-1 ring-gray-200">
     <UAlert
       v-show="alertFormError"
       icon="mdi-information"
@@ -10,7 +10,7 @@
       class="mb-4"
     />
     <UForm class="space-y-4" @submit="onSubmit">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <USelectMenu
           v-model="selectedType"
           :options="typeOptions"
@@ -47,42 +47,40 @@
 </template>
 
 <script lang="ts" setup>
-import { TRACKER_TYPE_OPTIONS } from "../constants/tracker_types";
+import { TRACKER_TYPE_OPTIONS } from '../constants/tracker_types'
 
 const props = defineProps<{
-  date: string;
-  userId: string;
-}>();
+  date: string
+  userId: string
+}>()
 
-const emit = defineEmits(["cancel", "success-create"]);
+const emit = defineEmits(['cancel', 'success-create'])
 
-const client = useSupabaseClient();
+const client = useSupabaseClient()
 
-const { data: projects } = await useAsyncData("projects", async () => {
+const { data: projects } = await useAsyncData('projects', async () => {
   const { data } = await client
-    .from("projects")
-    .select("id, name")
-    .order("created_at", { ascending: true });
+    .from('projects')
+    .select('id, name')
+    .order('created_at', { ascending: true })
 
-  return data;
-});
+  return data
+})
 
-const typeOptions = TRACKER_TYPE_OPTIONS;
+const typeOptions = TRACKER_TYPE_OPTIONS
 
-const projectOptions = projects;
+const projectOptions = projects
 
-const timingOptions = [
-  0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8,
-];
+const timingOptions = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
-const selectedType = ref();
-const selectedProj = ref();
-const selectedTiming = ref();
-const detail = ref("");
+const selectedType = ref()
+const selectedProj = ref()
+const selectedTiming = ref()
+const detail = ref('')
 
-const toast = useToast();
+const toast = useToast()
 
-const alertFormError = ref(false);
+const alertFormError = ref(false)
 
 const onSubmit = async () => {
   if (
@@ -90,38 +88,40 @@ const onSubmit = async () => {
     selectedTiming.value === undefined ||
     selectedProj.value === undefined
   ) {
-    alertFormError.value = true;
-    return;
+    alertFormError.value = true
+
+    return
   }
 
-  alertFormError.value = false;
-  const { error } = await client.from("trackers").insert({
+  alertFormError.value = false
+  const { error } = await client.from('trackers').insert({
     detail: detail.value.replace(/\r?\n/g, '<br />'),
     timing: selectedTiming.value,
     tracker_type: selectedType.value.value,
     project_id: selectedProj.value,
     created_by: props.userId,
     tracker_date: props.date,
-  });
+  })
 
   if (error) {
     toast.add({
-      icon: "mdi-close-circle",
-      title: "เพิ่มข้อมูลไม่สำเร็จ",
+      icon: 'mdi-close-circle',
+      title: 'เพิ่มข้อมูลไม่สำเร็จ',
       description: error.message,
-      color: "red",
-    });
+      color: 'red',
+    })
   } else {
     toast.add({
-      icon: "mdi-check-circle",
-      title: "เพิ่มข้อมูลสำเร็จ",
-      color: "green",
-    });
-    emit("success-create");
+      icon: 'mdi-check-circle',
+      title: 'เพิ่มข้อมูลสำเร็จ',
+      color: 'green',
+    })
+
+    emit('success-create')
   }
-};
+}
 
 const handleCancel = () => {
-  emit("cancel");
-};
+  emit('cancel')
+}
 </script>
