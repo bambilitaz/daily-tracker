@@ -1,6 +1,6 @@
 <template>
-  <div class="grid w-full grid-cols-1 lg:grid-cols-3 lg:space-x-12 lg:space-y-0">
-    <div class="order-2 col-span-2 lg:order-1">
+  <div class="grid w-full grid-cols-1 gap-8 lg:grid-cols-3">
+    <div class="order-2 col-span-1 lg:order-1 lg:col-span-2">
       <UCard>
         <div class="relative">
           <div>
@@ -22,7 +22,7 @@
         </UFormGroup>
         <div
           v-if="trackerList.value && trackerList.value.length > 0"
-          class="grid grid-cols-1 gap-4 lg:grid-cols-3"
+          class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
         >
           <CardUserWithTrackers
             v-for="group in groupFilterTeam"

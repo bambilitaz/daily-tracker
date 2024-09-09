@@ -1,16 +1,10 @@
 <template>
   <div class="grid w-full grid-cols-1 gap-8 lg:grid-cols-3">
-    <div class="col-span-1 lg:col-span-2">
-      <UCard>
-        <div
-          class="bg-primary mb-8 flex items-center justify-between rounded-full px-4 py-2 font-semibold text-white"
-        >
-          <UIcon name="heroicons-outline:chat" class="mr-2 size-6" />
-          <p class="text-lg">Hi {{ displayUserName }} , How are you today ?</p>
-        </div>
+    <div class="col-span-1 flex flex-col gap-8 lg:col-span-2">
+      <UCard class="order-2 lg:order-1">
         <div class="relative">
           <div>
-            <h1 class="text-primary mb-4 text-3xl font-bold">My Tasks</h1>
+            <h1 class="text-primary mb-4 text-3xl font-bold">Tasks of {{ displayUserName }}</h1>
             <h2 class="mb-8 font-bold">{{ displayDate }}</h2>
           </div>
           <img
@@ -18,11 +12,14 @@
             class="absolute right-[-50px] top-[-90px] h-60 opacity-30 lg:opacity-100"
           />
         </div>
-        <TrackerList :user-id="user?.id" :date="currentDate" />
+        <TrackerList readonly :user-id="user!.id" :date="currentDate" />
       </UCard>
+      <div class="order-1 lg:order-2">
+        <UButton icon="mdi-arrow-left" size="xl" to="/members" label="ย้อนกลับ" />
+      </div>
     </div>
     <div class="col-span-1">
-      <CalendarPickerWithUser :user-id="user?.id" @select-date="handleDateChange" />
+      <CalendarPickerWithUser :user-id="user!.id" @select-date="handleDateChange" />
     </div>
   </div>
 </template>
@@ -32,15 +29,14 @@ import CalendarPickerWithUser from '~/components/CalendarPickerWithUser.vue'
 import TrackerList from '~/components/TrackerList.vue'
 import moment from 'moment'
 
+const props = defineProps<{
+  user: any
+}>()
+
 const currentDate = ref(moment().format('YYYY-MM-DD'))
 const displayDate = computed(() => moment(currentDate.value).format('LL'))
 
-const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
-
-const displayUserName = computed(() => user?.email?.replace('@finema.co', '').toUpperCase())
+const displayUserName = computed(() => props.user?.email?.replace('@finema.co', '').toUpperCase())
 
 const handleDateChange = (date: Date) => {
   currentDate.value = moment(date).format('YYYY-MM-DD')

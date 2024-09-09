@@ -1,7 +1,7 @@
 <template>
   <div>
     <TrackerUpdateForm
-      v-if="showUpdateForm"
+      v-if="showUpdateForm && !readonly"
       :item="item"
       @cancel="handleCancelUpdate"
       @success-update="handleSuccessUpdate"
@@ -18,7 +18,7 @@
             # {{ item.projects.name }}
           </UBadge>
         </div>
-        <div class="space-x-2">
+        <div v-if="!readonly" class="space-x-2">
           <UButton variant="soft" color="gray" trailing-icon="mdi-pencil" @click="updateTracker" />
           <UButton variant="soft" color="gray" trailing-icon="mdi-trash" @click="deleteTracker" />
         </div>
@@ -39,6 +39,7 @@ const emit = defineEmits(['refresh'])
 
 const props = defineProps<{
   item: ITracker
+  readonly?: boolean
 }>()
 
 const showUpdateForm = ref(false)

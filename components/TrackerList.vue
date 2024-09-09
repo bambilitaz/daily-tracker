@@ -5,11 +5,12 @@
         v-for="item in trackerList.value"
         :key="item.id"
         :item="item"
+        :readonly="readonly"
         @refresh="handleRefresh"
       />
       <div class="flex justify-end">
         <UButton
-          v-if="!showCreateForm"
+          v-if="!showCreateForm && !readonly"
           icon="mdi-plus"
           size="lg"
           variant="outline"
@@ -24,12 +25,12 @@
       class="flex min-h-[300px] flex-col items-center justify-center gap-6"
     >
       <p class="text-gray italic">ยังไม่มีข้อมูลของวันนี้</p>
-      <UButton icon="mdi-plus" size="lg" variant="outline" @click="handleCreate">
+      <UButton v-if="!readonly" icon="mdi-plus" size="lg" variant="outline" @click="handleCreate">
         เพิ่มข้อมูล
       </UButton>
     </div>
     <TrackerCreateForm
-      v-if="showCreateForm"
+      v-if="showCreateForm && !readonly"
       :date="props.date"
       :user-id="props.userId"
       @cancel="handleCancelCreate"
@@ -42,11 +43,12 @@
 import { type ITracker } from './types'
 import TrackerItem from './TrackerItem.vue'
 import TrackerCreateForm from './TrackerCreateForm.vue'
-import moment from 'moment';
+import moment from 'moment'
 
 const props = defineProps<{
   userId: string
   date: string
+  readonly?: boolean
 }>()
 
 const client = useSupabaseClient()

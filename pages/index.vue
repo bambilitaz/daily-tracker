@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import Main from '../features/Main/index.vue'
+import Main from '~/features/Main/index.vue'
 
 definePageMeta({
   layout: 'dashboard',

@@ -1,10 +1,12 @@
 <template>
   <NuxtLayout>
-    <h2>Coming Soon...</h2>
+    <Members />
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import Members from '~/features/Members/index.vue'
+
 definePageMeta({
   layout: 'dashboard',
   middleware: 'auth',

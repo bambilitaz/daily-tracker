@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import TeamDaily from '../features/TeamDaily/index.vue'
+import TeamDaily from '~/features/TeamDaily/index.vue'
 
 definePageMeta({
   layout: 'dashboard',
