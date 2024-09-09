@@ -3,6 +3,7 @@ export default {
   content: [
     'app.vue',
     'error.vue',
+    './assets/**/*.{scss}',
     './constants/**/*.{js,vue,ts}',
     './components/**/*.{js,vue,ts}',
     './features/**/*.{js,vue,ts}',
