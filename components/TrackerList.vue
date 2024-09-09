@@ -72,7 +72,8 @@ const handleRefresh = () => {
 
 const fetchTrackers = async () => {
   console.log(props.date)
-  const { data: trackers } = await useAsyncData('trackers', async () => {
+  console.log(props.userId)
+  const { data: myTrackers } = await useAsyncData('my_trackers', async () => {
     const { data } = await client
       .from('trackers')
       .select(
@@ -85,7 +86,9 @@ const fetchTrackers = async () => {
     return data
   })
 
-  trackerList.value = trackers
+  console.log(myTrackers)
+
+  trackerList.value = myTrackers
   showCreateForm.value = false
 }
 

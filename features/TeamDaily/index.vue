@@ -24,7 +24,7 @@
           v-if="trackerList.value && trackerList.value.length > 0"
           class="grid grid-cols-1 gap-4 lg:grid-cols-3"
         >
-          <DashboardUserTrackers
+          <CardUserWithTrackers
             v-for="group in groupFilterTeam"
             :key="group.user_id"
             :group="group"
@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import CalendarPicker from '~/components/CalendarPicker.vue'
-import DashboardUserTrackers from '~/components/DashboardUserTrackers.vue'
+import CardUserWithTrackers from '~/components/CardUserWithTrackers.vue'
 import moment from 'moment'
 import { TEAM_OPTIONS } from '~/constants/team'
 

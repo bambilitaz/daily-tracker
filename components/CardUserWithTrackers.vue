@@ -23,7 +23,7 @@
       </h5>
     </div>
     <div v-if="group.items && group.items.length > 0" class="space-y-2">
-      <DashboardTrackerItem v-for="item in group.items" :key="item.id" :item="item" />
+      <CardUserTrackerItem v-for="item in group.items" :key="item.id" :item="item" />
     </div>
     <div v-else class="flex min-h-[300px] flex-col items-center justify-center gap-6">
       <p class="text-gray italic">ยังไม่มีข้อมูลของวันนี้</p>
@@ -35,7 +35,7 @@
 import moment from 'moment'
 import { createAvatar } from '@dicebear/core'
 import { dylan } from '@dicebear/collection'
-import DashboardTrackerItem from './DashboardTrackerItem.vue'
+import CardUserTrackerItem from './CardUserTrackerItem.vue'
 
 const props = defineProps<{
   group: any
