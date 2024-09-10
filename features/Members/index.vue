@@ -3,7 +3,7 @@
     <div class="relative">
       <div>
         <h1 class="text-primary mb-4 text-3xl font-bold">All Members</h1>
-        <h2 class="mb-8 font-bold text-gray-400">เลือกดูรายคนจากสมาชิกทั้งหมด</h2>
+        <h2 class="mb-8 text-gray-400">เลือกดูรายคนจากสมาชิกทั้งหมด</h2>
       </div>
       <img
         src="../../public/images/gp-members.png"
