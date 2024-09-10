@@ -25,7 +25,7 @@
         />
       </UFormGroup>
     </div>
-    <div class="grid grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
       <ProfileItem v-for="member in filteredMembers" :key="member.id" :profile="member" />
     </div>
   </UCard>
