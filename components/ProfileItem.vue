@@ -16,7 +16,7 @@
           </h4>
         </div>
         <UBadge color="primary" variant="soft" class="absolute right-0 top-0 font-bold">{{
-          profile.team.toUpperCase()
+          TEAM_LABEL[profile.team.toLowerCase() as TEAM]
         }}</UBadge>
       </div>
     </NuxtLink>
@@ -26,6 +26,7 @@
 <script lang="ts" setup>
 import { createAvatar } from '@dicebear/core'
 import { dylan } from '@dicebear/collection'
+import { type TEAM, TEAM_LABEL } from '~/constants/team'
 
 const props = defineProps<{
   profile: any
